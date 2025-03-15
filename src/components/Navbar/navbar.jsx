@@ -15,7 +15,7 @@ function Navbar() {
 
     return (
         <div>
-            <nav className='bg-[#018a0f] h-[80px] p-[5px] fixed w-full'>
+            <nav className='bg-[#018a0f] h-[80px] p-[5px] fixed z-99 w-full'>
                 <div className='flex justify-between container m-auto'>
 
                     <div>
