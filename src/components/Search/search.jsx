@@ -21,7 +21,7 @@ function Search() {
                     animate={{ opacity: 1, y: 0 }} 
                     exit={{ opacity: 0, y: -10 }} 
                     transition={{ duration: 0.3 }}
-                    className="absolute top-10 right-0 bg-white px-10 py-3 rounded-lg shadow-md " >
+                    className="absolute top-10 -right-14 bg-white px-10 py-3 rounded-lg shadow-md " >
                         <input
                         type="text"
                         placeholder="Qidirish..."

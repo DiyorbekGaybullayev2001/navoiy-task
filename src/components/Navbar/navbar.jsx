@@ -200,7 +200,7 @@ function Navbar() {
                         </div>
                     </div>
 
-                    <div className='items-center flex gap-10'>
+                    <div className='items-center lg:hidden flex gap-10'>
                         <Search/>
                         <FiMenu className='text-white text-4xl cursor-pointer lg:hidden' onClick={toggleMenu} />
                     </div>
