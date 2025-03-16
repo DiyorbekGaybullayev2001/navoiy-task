@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react';
 import logo from '../../../public/logo.png';
-import { BsChevronDown } from "react-icons/bs";
+import { BsChevronDown, BsChevronUp } from "react-icons/bs";
+import { FiMenu, FiX } from "react-icons/fi";
 import Search from '../Search/search';
 import { motion } from 'framer-motion';
 
@@ -13,10 +14,28 @@ function Navbar() {
     const [isAplicationOpen, setAplicationOpen] = useState(false);
     const [isLuangeOpen, setLuangeOpen] = useState(false);
 
+    const [isOpen, setIsOpen] = useState(false);
+    const [openDropdown, setOpenDropdown] = useState(null);
+
+    const toggleMenu = () => setIsOpen(!isOpen);
+    const toggleDropdown = (index) => {
+        setOpenDropdown(openDropdown === index ? null : index);
+    };
+
+    const menuItems = [
+        { title: "Biz Haqimizda", submenu: ["Biz Haqimizda", "Savol-Javoblar", "Manzil (Lokatsiya)", "Litsenziya", "Universitet Yangiliklari"] },
+        { title: "Tuzilma", submenu: ["Rahbariyat", "Fakultetlar va Kafedralar", "Bo'lim xodimlari"] },
+        { title: "Yashil Universitet" },
+        { title: "Xalqaro Aloqalar", submenu: ["Xalqaro aloqalar bo'limi", "Hamkor universitet va tashkilotlar"] },
+        { title: "Elektron Kutubxona" },
+        { title: "Media", submenu: ["Videolar", "Rasmlar"] },
+        { title: "Ariza", submenu: ["Imtihon topshirish", "Ariza topshirish"] }
+    ];
+
     return (
         <div>
             <nav className='bg-[#018a0f] h-[80px] p-[5px] fixed z-99 w-full'>
-                <div className='flex justify-between container m-auto'>
+                <div className='flex justify-between container m-auto items-center'>
 
                     <div>
                         <a href="/">
@@ -24,7 +43,7 @@ function Navbar() {
                         </a> 
                     </div>
 
-                    <div className='flex items-center '>
+                    <div className='lg:flex items-center hidden '>
                         <ul className='flex gap-10 items-center text-white font-serif text-lg'>
                             {/* Biz haqimizda  dropdown*/}
                             <li className='relative flex items-center gap-1 hover:text-amber-300' 
@@ -152,7 +171,7 @@ function Navbar() {
                         </ul>
                     </div>
 
-                    <div className='flex items-center gap-3'>
+                    <div className='hidden lg:flex items-center gap-3'>
                         <ul>
                         <li 
                             onMouseEnter={() => setLuangeOpen(true)} 
@@ -181,6 +200,51 @@ function Navbar() {
                         </div>
                     </div>
 
+                    <div className='items-center flex gap-10'>
+                        <Search/>
+                        <FiMenu className='text-white text-4xl cursor-pointer lg:hidden' onClick={toggleMenu} />
+                    </div>
+
+                    {/* Sidebar Menu */}
+                {isOpen && (
+                  <motion.div 
+                    initial={{ x: "100%" }} 
+                    animate={{ x: 0 }} 
+                    exit={{ x: "100%" }} 
+                    transition={{ duration: 0.3 }}
+                    className='fixed top-0 right-0 w-3/4 h-full bg-white shadow-lg z-50 p-5 overflow-y-auto'
+                >
+                    <div className='flex justify-between items-center'>
+                        {/* <h2 className='text-lg font-bold'>Menyu</h2> */}
+                        <FiX className='text-3xl cursor-pointer' onClick={toggleMenu} />
+                    </div>
+                    
+                    <ul className='mt-5'>
+                        {menuItems.map((item, index) => (
+                            <li key={index} className='border-b py-3'>
+                                <div className='flex justify-between items-center cursor-pointer' onClick={() => item.submenu && toggleDropdown(index)}>
+                                    <span className='text-lg font-medium'>{item.title}</span>
+                                    {item.submenu && (openDropdown === index ? <BsChevronUp /> : <BsChevronDown />)}
+                                </div>
+                                {openDropdown === index && item.submenu && (
+                                    <motion.ul 
+                                        initial={{ opacity: 0, height: 0 }} 
+                                        animate={{ opacity: 1, height: "auto" }} 
+                                        exit={{ opacity: 0, height: 0 }} 
+                                        transition={{ duration: 0.3 }}
+                                        className='mt-2 pl-4 border-l'
+                                    >
+                                        {item.submenu.map((subItem, subIndex) => (
+                                            <li key={subIndex} className='py-2 text-sm'>{subItem}</li>
+                                        ))}
+                                    </motion.ul>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                </motion.div>
+            )}
+
                 </div>
             </nav>
         </div>
@@ -188,6 +252,12 @@ function Navbar() {
 }
 
 export default Navbar;
+
+
+
+
+
+
 
 
 

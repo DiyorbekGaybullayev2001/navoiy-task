@@ -30,8 +30,8 @@ function Directions() {
       <div className='w-full h-full bg-[#154918a3] pt-[50px] p-[20px] '>
         <div className='container m-auto'>
             <div className='text-white font-serif'>
-                <h1 className='text-[50px]'>Yo'nalishlar</h1>
-                <p className='text-[25px]'>Ushbu yo'nalishlarda sirtqi va kunduzgi shaklda professional ta'lim olishingiz mumkin.</p>
+                <h1 className='text-3xl font-bold sm:text-[50px]'>Yo'nalishlar</h1>
+                <p className='sm:text-[25px] mt-[10px]'>Ushbu yo'nalishlarda sirtqi va kunduzgi shaklda professional ta'lim olishingiz mumkin.</p>
             </div>
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 m-auto mt-[50px]'>
